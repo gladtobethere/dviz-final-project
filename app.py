@@ -2,10 +2,9 @@ from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 from api.public_power import get_public_power
 import os
-import flask
 
-server = flask.Flask(__name__)
-app = Dash(__name__, server=server)
+app = Dash(__name__)
+server = app.server
 
 app.layout = html.Div([
     html.H1('Energy Production in Switzerland', style={'textAlign': 'center'}),
