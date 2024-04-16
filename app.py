@@ -1,12 +1,11 @@
-import dash
-from dash import dcc, html
+from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 from api.public_power import get_public_power
 import os
 import flask
 
 server = flask.Flask(__name__)
-app = dash.Dash(__name__, server=server)
+app = Dash(__name__, server=server)
 
 app.layout = html.Div([
     html.H1('Energy Production in Switzerland', style={'textAlign': 'center'}),
@@ -14,8 +13,8 @@ app.layout = html.Div([
 ])
 
 @app.callback(
-    dash.dependencies.Output('energy-production-chart', 'figure'),
-    dash.dependencies.Input('energy-production-chart', 'id')
+    Output('energy-production-chart', 'figure'),
+    Input('energy-production-chart', 'id')
 )
 def update_graph(_):
     df = get_public_power('2023-01-01T00:00+01:00', '2023-01-01T23:45+01:00')
