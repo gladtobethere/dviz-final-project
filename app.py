@@ -2,6 +2,7 @@ import dash
 from dash import dcc, html
 import plotly.express as px
 from api.public_power import get_public_power
+import os
 
 app = dash.Dash(__name__)
 
@@ -23,4 +24,4 @@ def update_graph(_):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
